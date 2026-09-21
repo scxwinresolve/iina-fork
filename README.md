@@ -13,6 +13,22 @@
 </p>
 
 ---
+
+## 本 Fork 的改动（基于 IINA 1.5.0-beta2）
+
+在官方版本基础上做了以下个人定制：
+
+- **侧边栏伽马预设三按钮**：`709-A`、`伽马2.2`、`BT.1886（2.4）`，一键切换显示伽马
+- **欢迎页标识**：版本号下方标注"春星开讲定制版"
+- **OSD 伽马显示**：精度提升至 `%.2f`
+- **中文统一用词**："伽玛"→"伽马"
+
+> 本仓库基于 [iina/iina](https://github.com/iina/iina) 1.5.0-beta2 修改，遵循 GPL-3.0 协议。修改后的源代码完整公开于本仓库。
+>
+> **编译依赖**：`deps/`（mpv / FFmpeg 预编译库）已被 gitignore，克隆后请先运行 `./other/download_libs.sh` 拉取。
+
+---
+
 [![Crowdin](https://badges.crowdin.net/iina/localized.svg)](https://crowdin.com/project/iina)
 ## Features
 

@@ -576,7 +576,8 @@ class MPVController: NSObject {
 
     setUserOption(PK.audioDriverEnableAVFoundation, type: .other, forName: MPVOption.Audio.ao,
                   verboseIfDefault: true) { key in
-      Preference.bool(for: key) ? "avfoundation" : "coreaudio"
+      // coreaudio 优先，失败时（如 mono 音轨 channel layout -50）自动回退 avfoundation
+      Preference.bool(for: key) ? "avfoundation" : "coreaudio,avfoundation"
     }
 
     // Set user defined conf dir.

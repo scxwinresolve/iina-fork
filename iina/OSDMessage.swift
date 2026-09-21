@@ -105,7 +105,7 @@ enum OSDMessage {
   case hue(Int)
   case saturation(Int)
   case brightness(Int)
-  case gamma(Int)
+  case gamma(Double)
 
   case addFilter(String)
   case removeFilter

@@ -614,11 +614,11 @@ fileprivate class EqualizerView: NSView {
   private unowned let player: PlayerCore
 
   /// 709-A 预设：gamma ≈ 10 → 等效显示 gamma ≈ 1.961
-  private static let gammaPreset709A: Int = 10
+  private static let gammaPreset709A: Double = 9.71
   /// 2.2 预设：gamma ≈ 4 → 等效显示 gamma ≈ 2.2
-  private static let gammaPreset22: Int = 4
+  private static let gammaPreset22: Double = 4.18
   /// BT.1886 预设：gamma = 0 → 等效显示 gamma = 2.4
-  private static let gammaPreset1886: Int = 0
+  private static let gammaPreset1886: Double = 0
 
   private var brightnessSlider: NSSlider!
   private var contrastSlider: NSSlider!
@@ -717,7 +717,7 @@ fileprivate class EqualizerView: NSView {
     brightnessSlider.intValue = Int32(player.info.brightness)
     contrastSlider.intValue = Int32(player.info.contrast)
     saturationSlider.intValue = Int32(player.info.saturation)
-    gammaSlider.intValue = Int32(player.info.gamma)
+    gammaSlider.doubleValue = player.info.gamma
     hueSlider.intValue = Int32(player.info.hue)
   }
 
@@ -733,11 +733,15 @@ fileprivate class EqualizerView: NSView {
 
   @objc private func sliderAction(_ sender: NSSlider) {
     let config = configs.first(where: { $0.tag == sender.tag })!
-    player.setVideoEqualizer(forOption: config.type, value: Int(sender.intValue))
+    if config.type == .gamma {
+      player.setVideoEqualizer(forOption: config.type, value: sender.doubleValue)
+    } else {
+      player.setVideoEqualizer(forOption: config.type, value: Double(sender.intValue))
+    }
   }
 
   @objc private func presetAction(_ sender: NSButton) {
-    let value: Int
+    let value: Double
     switch sender.tag {
     case 0: value = Self.gammaPreset709A
     case 1: value = Self.gammaPreset22
@@ -745,6 +749,6 @@ fileprivate class EqualizerView: NSView {
     default: return
     }
     player.setVideoEqualizer(forOption: .gamma, value: value)
-    gammaSlider.intValue = Int32(value)
+    gammaSlider.doubleValue = value
   }
 }

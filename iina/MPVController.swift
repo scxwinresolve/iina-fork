@@ -146,7 +146,7 @@ class MPVController: NSObject {
     MPVOption.Subtitles.subVisibility: MPV_FORMAT_FLAG,
     MPVOption.Equalizer.contrast: MPV_FORMAT_INT64,
     MPVOption.Equalizer.brightness: MPV_FORMAT_INT64,
-    MPVOption.Equalizer.gamma: MPV_FORMAT_INT64,
+    MPVOption.Equalizer.gamma: MPV_FORMAT_DOUBLE,
     MPVOption.Equalizer.hue: MPV_FORMAT_INT64,
     MPVOption.Equalizer.saturation: MPV_FORMAT_INT64,
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
@@ -1464,14 +1464,14 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Equalizer.gamma:
-      guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
+      guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVOption.Equalizer.gamma, property.format)
         break
       }
-      let intData = Int(data)
+      let doubleData = Double(data)
       DispatchQueue.main.async { [self] in
-        player.info.gamma = intData
-        player.sendOSD(.gamma(intData))
+        player.info.gamma = doubleData
+        player.sendOSD(.gamma(doubleData))
         player.postNotification(.iinaVideoEqualizerChanged)
       }
 

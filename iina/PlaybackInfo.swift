@@ -158,7 +158,7 @@ class PlaybackInfo {
   var brightness: Int = 0
   var contrast: Int = 0
   var saturation: Int = 0
-  var gamma: Int = 0
+  var gamma: Double = 0
   var hue: Int = 0
 
   var volume: Double = 50

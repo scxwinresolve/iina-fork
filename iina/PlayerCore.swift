@@ -1385,7 +1385,7 @@ class PlayerCore: NSObject {
     case brightness, contrast, saturation, gamma, hue
   }
 
-  func setVideoEqualizer(forOption option: VideoEqualizerType, value: Int) {
+  func setVideoEqualizer(forOption option: VideoEqualizerType, value: Double) {
     let optionName: String
     switch option {
     case .brightness:

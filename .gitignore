@@ -1,0 +1,6 @@
+deps/
+DerivedData/
+build/
+xcuserdata/
+.DS_Store
+*.log

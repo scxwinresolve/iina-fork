@@ -386,7 +386,7 @@ enum OSDMessage {
 
     case .gamma(let value):
       return (
-        String(format: NSLocalizedString("osd.video_eq.gamma", comment: "Grama: %i"), value),
+        String(format: NSLocalizedString("osd.video_eq.gamma", comment: "Gamma: %.2f"), Double(value)),
         .withProgress(toPercent(Double(value), 100))
       )
 
